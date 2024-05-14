@@ -1,4 +1,5 @@
 import React from 'react';
+import { useInView } from "react-intersection-observer";
 import { MdFlight } from "react-icons/md";
 import { MdHotel } from "react-icons/md";
 import { BsFillRocketTakeoffFill } from "react-icons/bs";
@@ -7,8 +8,13 @@ import { GrMapLocation } from "react-icons/gr";
 import './Services.css'
 
 function Services(props) {
+    const { ref, inView } = useInView({
+        /* Optional options */
+        threshold: 0,
+        rootMargin: "0px",
+    });
     return (
-        <div id='services' className='section_container services-container'>
+        <div id='services' className='section_container services-container' ref={ref}>
             <div className="section-wrapper service-wrapper">
 
                 <h3 className='section_title'>
@@ -20,7 +26,9 @@ function Services(props) {
                     <div className="services-items">
                         <div className="service-item">
                             <div className="service-item-icon">
-                                <MdFlight style={{ transform: "rotate(25deg)" }} />
+                                <MdFlight className={inView ? "icon-in" : ""}
+
+                                />
                             </div>
                             <h4 className="service-item-title">
                                 Flight Tickets
@@ -32,7 +40,8 @@ function Services(props) {
                         </div>
                         <div className="service-item">
                             <div className="service-item-icon">
-                                <MdHotel />
+                                <MdHotel className={inView ? "icon-in" : ""}
+                                    style={{ animationDelay: "250ms" }} />
                             </div>
                             <h4 className="service-item-title">
                                 Hotel Reservation
@@ -44,7 +53,8 @@ function Services(props) {
                         </div>
                         <div className="service-item">
                             <div className="service-item-icon">
-                                <BsFillRocketTakeoffFill />
+                                <BsFillRocketTakeoffFill className={inView ? "icon-in" : ""}
+                                    style={{ animationDelay: "500ms" }} />
                             </div>
                             <h4 className="service-item-title">
                                 Top Package
@@ -56,7 +66,8 @@ function Services(props) {
                         </div>
                         <div className="service-item">
                             <div className="service-item-icon">
-                                <GrMapLocation />
+                                <GrMapLocation className={inView ? "icon-in" : ""}
+                                    style={{ animationDelay: "750ms" }} />
                             </div>
                             <h4 className="service-item-title">
                                 Best Destination
