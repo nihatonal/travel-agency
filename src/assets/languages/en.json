@@ -1,0 +1,110 @@
+{
+  "navlinks": [
+    "Home",
+    "About",
+    "Services",
+    "Gallery",
+    "Testimonials",
+    "Contact"
+  ],
+  "hero-title": "A BETTER WAY TO STAY",
+  "hero-title_span": "in Fethiye",
+  "hero-search-btn": "Search",
+  "about_items": [
+    "comfy bedrooms",
+    "fully equipped kitchens",
+    "air-conditioner",
+    "free wifi",
+    "washing and dryer machine",
+    "great location",
+    "parking",
+    "payment options",
+    "caring host"
+  ],
+  "about_desc": "We know what standards of service are and we do our best to provide you with the best experience in Fethiye! Our doors are always open for you!",
+  "is_loading": "Is Loading...",
+  "partner_title": "Maybe you might be interested in these...",
+  "villa_masal": "Villa Masal",
+  "villa_yoyo": "Yoyo Tinyhouse",
+  "bank_acoount": [
+    "Bank Account info",
+    "Account number :",
+    "Bank branch",
+    "IBAN",
+    "Name Surname"
+  ],
+  "google-btn": "Show all reviews",
+  "whatsup_status": "Typically replies within 30 mins",
+  "whatsup_message": "Hello there! 🤝 \nHow can we help?",
+  "whatsup_placeholder": "Type a message..",
+  "concept": "Consept",
+  "concept_page": [
+    {
+      "section-title": "Monihomes",
+      "section-id": "monihomes",
+      "section-buttons": [
+        "Rooms",
+        "Location",
+        "Features"
+      ],
+      "section-desc": [
+        "You will feel yourself at home in this small cozy apart hotel. Kitchen, iron, parking lot, wifi.. In short, we are ready to meet your every need. Our rooms are for 3 people and 2 of our rooms have balconies. And We have free car parking for our guests.",
+        "Our hotel is located exactly in the city center. The beaches are 10 minutes away by public transport. The coastal walking path is 3 minutes away, and you can shop on the historical Paspatur street, and you can enjoy an incredible seafood in the famous fish market."
+      ],
+      "section-features": [
+        "Caring host",
+        "Kitchens",
+        "Air-conditioner",
+        "Free wifi",
+        "City center",
+        "Parking",
+        "washing and dryer machine"
+      ]
+    },
+    {
+      "section-title": "Villa Masal",
+      "section-id": "villamasal",
+      "section-buttons": [
+        "Villa",
+        "Location",
+        "Features"
+      ],
+      "section-desc": [
+        "It consists of stone architecture suitable for the texture of the region. The interior of the villa, which serves with very comfortable garden furniture, a lodge positioned by the pool and a mini playground for the use of our little guests, also has a very spacious structure. There is also a jacuzzi in one bedroom and you can enjoy the sauna and fireplace with your loved ones.",
+        "Our location is Fethiye Cenger neighborhood. You are in the right place to start the day with the sounds of birds and enjoy the sun, the nature and the pool, away from the hustle and bustle of the city.\n An important reminder: In order to have a comfortable holiday, you need to do your shopping before going to the villa, because the nearest market is 12 KM away."
+      ],
+      "section-features": [
+        "Pool",
+        "Sauan",
+        "Jacuzzi",
+        "Two Bathrooms",
+        "Fireplace",
+        "Kitchen",
+        "Quiet",
+        "Children's Playground",
+        "Nature"
+      ]
+    },
+    {
+      "section-title": "Boat Trip",
+      "section-id": "boat_trip",
+      "section-buttons": [
+        "Information",
+        "Fee",
+        "Route"
+      ],
+      "section-desc": [
+        "Fethiye speedboat offers you a unique sea tour with its 5.50 m length and 115 HP 4-stroke engine.\n Our boat provides 24-hour service and can accommodate a maximum of 4 people.",
+        "4-hours tour is $500, extending the tour time needs extra fee."
+      ],
+      "section-features": [
+        "Kizil Ada - Gocek",
+        "Inlice - Gocek bays"
+      ]
+    }
+  ],
+  "read_more":"Read More",
+  "price_info":"Minimum 4 nights stay",
+  "price_night":"Per night",
+  "price_btn": "Price List"
+}
