@@ -22,6 +22,8 @@
   justify-content: center;
   align-items: center;
   background-color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  transition: all 500ms ease;
 }
 .socialbar_wrapper span {
   display: block;
@@ -43,5 +45,8 @@
   font-size: 24px;
 }
 .social-item:hover {
-  box-shadow: 0 0 10px var(--secondary-color);
+  background-color: #fff;
+}
+.social-item:hover svg {
+  color: var(--secondary-color);
 }

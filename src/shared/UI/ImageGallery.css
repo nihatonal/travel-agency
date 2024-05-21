@@ -1,0 +1,9 @@
+.image_gallery_container img {
+  box-shadow: 10px 10px 15px rgba(119, 136, 153, 0.842);
+  padding: 4px;
+}
+.image_gallery_container img:hover {
+  padding: 4px;
+  transition: all 0.3s;
+  background-color: rgba(119, 136, 153, 0.842);
+}

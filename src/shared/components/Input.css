@@ -7,7 +7,7 @@
 .form-control input,
 .form-control textarea {
   display: block;
-  font-family: var(--bacasime);
+  font-family: var(--primary-font-family);
   font-style: normal;
   font-weight: 500;
 }
@@ -19,18 +19,19 @@
 
 .form-control input,
 .form-control textarea {
-  width: 300px;
+  width: 100%;
   height: 40px;
-  border: 1px solid var(--secondary-color);
+  border: 1px solid transparent;
+  border-bottom: 1px solid #cdcdcd;
   background: transparent;
-  font-family: var(--bacasime);
+  font-family: var(--primary-font-family);
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--primary-color);
   line-height: 18px;
   position: relative;
-  padding-left: 20px;
+  padding-left: 0;
   margin-top: 10px;
 }
 .form-control textarea {
@@ -39,11 +40,13 @@
   padding-top: 10px;
 }
 ::placeholder {
-  font-family: var(--cavaet);
+  font-family: var(--primary-font-family);
+  color: #9e9e9e;
 }
 .form-control input:focus,
 .form-control textarea:focus {
   outline: none;
+  border-bottom: 1px solid #000;
 }
 
 /* .form-control--invalid label,
@@ -57,22 +60,28 @@
   border: 1px solid 0 0 10px rgb(230, 34, 93);
 } */
 
-.placeholder {
-  font-family: var(--primary-font-family);
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 18px;
-  align-items: center;
-  color: #828282;
-  padding: 0 16px;
-  position: absolute;
-  top: 16px;
-  transition: all 0.3s;
-  height: 18px;
+.form-control input[type="month"] {
+  position: relative;
 }
-/* @media only screen and (max-width: 767px) {
-  .form-control input {
-    height: 40px;
-  }
-} */
+
+.form-control input[type="month"]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  background: none;
+  z-index: 1;
+}
+
+.form-control input[type="month"]:before {
+  color: transparent;
+  background: none;
+  display: block;
+  font-family: "FontAwesome";
+  content: "\f073";
+  /* This is the calendar icon in FontAwesome */
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  top: 12px;
+  right: 6px;
+  color: var(--secondary-color);
+  cursor: pointer;
+}

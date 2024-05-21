@@ -1,5 +1,5 @@
 .navbar {
-  width:650px;
+  width: 650px;
   /* height: 40px; */
   display: flex;
   justify-content: space-between;
@@ -13,7 +13,10 @@
 }
 @media only screen and (max-width: 767px) {
   .navbar {
-    display: none;
+    flex-direction: column;
+    width: 100%;
+    grid-column: 1 / span 2;
+    margin-top: 10px;
   }
 }
 
@@ -22,7 +25,7 @@
   font-size: 16px;
   line-height: 1.6;
   font-weight: 600;
-  color: var(--black-color);
+  color: #fff;
   cursor: pointer;
   /* position: relative; */
 }
@@ -38,4 +41,31 @@
 
 .active-nav-item {
   color: var(--secondary-color);
+}
+@media only screen and (max-width: 767px) {
+  .nav-item {
+    font-weight: 700;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 120%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    color: var(--primary-color);
+  }
+  .mobile-nav-link {
+    display: block;
+    width: 100%;
+  }
+  .nav-item a {
+    display: block;
+  }
+  .nav-item:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+  }
+  .active-nav-item {
+    background-color: var(--secondary-color);
+  }
 }

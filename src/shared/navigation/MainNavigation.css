@@ -4,23 +4,52 @@
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: center;
-  top: 0;
+  justify-content: flex-start;
   transition: all 0.3s;
   z-index: 99;
-  padding: 2rem 0;
+  padding-top: 1.563rem;
+  padding-bottom: 1.563rem;
+}
+.header_scroll {
+  background: #fff;
+  padding: 0;
+}
+.header_scroll .nav-item {
+  color: var(--primary-color);
+}
+.header_scroll .active-nav-item {
+  color: var(--secondary-color);
 }
 
+@media only screen and (max-width: 767px) {
+  /* .header {
+    background-color: #fff;
+  } */
+  .header_scroll {
+    background: #fff;
+    padding: 2rem 0;
+  }
+  .header_scroll .active-nav-item {
+    color: var(--primary-color);
+  }
+}
 .main_header {
   margin: 0 auto;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-around; */
   position: relative;
+  height: auto;
+  padding: 14px 0;
 }
+
 .main_header_concept {
   justify-content: space-between;
   padding: 15px 50px 0;
+}
+.logo-wrapper {
+  display: none;
+  order: -1;
 }
 @keyframes social_in {
   from {
@@ -68,19 +97,40 @@
     display: none;
   }
 }
+
 @media only screen and (max-width: 767px) {
   .header {
-    height: 80px;
+    padding-top: 0.563rem;
+    padding-bottom: 0.563rem;
+  }
+  .header_scroll {
+    background: #fff;
+    padding: 0;
   }
   .main_header {
-    justify-content: space-between;
-    padding: 10px 30px 0;
+    width: 100%;
+    padding: 10px 30px;
+    transition: all 0.3s;
+    flex-wrap: wrap;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
+    overflow: hidden;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .main_header-mobile {
+    height: 380px;
   }
   .main_header_concept {
     padding: 10px 30px 0;
   }
   .main_header .socialbar-container {
     display: none;
+  }
+  .logo-wrapper {
+    display: block;
   }
   .logo {
     height: 60px;
@@ -109,6 +159,7 @@
     background-color: var(--secondary-color);
   }
 }
+
 .sidedrawer-navlinks {
   display: block;
   width: 100%;
@@ -138,4 +189,9 @@
   align-items: center;
   padding: 15px 0;
   color: var(--secondary-color);
+}
+
+.sidedrawer-navlinks .active-nav-item {
+  color: #fff;
+  background-color: var(--secondary-color);
 }

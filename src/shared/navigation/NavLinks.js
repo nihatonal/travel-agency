@@ -20,7 +20,7 @@ function NavLinks(props) {
                 </NavLink>
 
             </div> */}
-            <div className={props.sidebar_nav_item_wrapper} onClick={props.closeDrawer}>
+            <div className={`mobile-nav-link ${props.sidebar_nav_item_wrapper}`} >
                 <Link
                     className="nav-item"
                     activeClass="active-nav-item"
@@ -29,11 +29,12 @@ function NavLinks(props) {
                     smooth={true}
                     offset={0}
                     duration={750}
+                    onClick={props.closeDrawer}
                 >
                     {lang.dictionary["navlinks"][0]}
                 </Link>
             </div>
-            <div className={props.sidebar_nav_item_wrapper} onClick={props.closeDrawer}>
+            <div className={`mobile-nav-link ${props.sidebar_nav_item_wrapper}`}>
                 <Link
                     className="nav-item"
                     activeClass="active-nav-item"
@@ -42,11 +43,12 @@ function NavLinks(props) {
                     smooth={true}
                     offset={0}
                     duration={750}
+                    onClick={props.closeDrawer}
                 >
                     {lang.dictionary["navlinks"][1]}
                 </Link>
             </div>
-            <div className={props.sidebar_nav_item_wrapper} onClick={props.closeDrawer}>
+            <div className={`mobile-nav-link ${props.sidebar_nav_item_wrapper}`} >
                 <Link
                     className="nav-item"
                     activeClass="active-nav-item"
@@ -55,11 +57,12 @@ function NavLinks(props) {
                     smooth={true}
                     offset={0}
                     duration={750}
+                    onClick={props.closeDrawer}
                 >
                     {lang.dictionary["navlinks"][2]}
                 </Link>
             </div>
-            <div className={props.sidebar_nav_item_wrapper} onClick={props.closeDrawer}>
+            <div className={`mobile-nav-link ${props.sidebar_nav_item_wrapper}`} >
                 <Link
                     className="nav-item"
                     activeClass="active-nav-item"
@@ -68,11 +71,12 @@ function NavLinks(props) {
                     smooth={true}
                     offset={0}
                     duration={750}
+                    onClick={props.closeDrawer}
                 >
                     {lang.dictionary["navlinks"][3]}
                 </Link>
             </div>
-            <div className={props.sidebar_nav_item_wrapper} onClick={props.closeDrawer}>
+            <div className={`mobile-nav-link ${props.sidebar_nav_item_wrapper}`} >
                 <Link
                     className="nav-item"
                     activeClass="active-nav-item"
@@ -81,11 +85,12 @@ function NavLinks(props) {
                     smooth={true}
                     offset={0}
                     duration={750}
+                    onClick={props.closeDrawer}
                 >
                     {lang.dictionary["navlinks"][4]}
                 </Link>
             </div>
-            <div className={props.sidebar_nav_item_wrapper} onClick={props.closeDrawer}>
+            <div className={`mobile-nav-link ${props.sidebar_nav_item_wrapper}`} >
                 <Link
                     className="nav-item"
                     activeClass="active-nav-item"
@@ -94,6 +99,7 @@ function NavLinks(props) {
                     smooth={true}
                     offset={0}
                     duration={750}
+                    onClick={props.closeDrawer}
                 >
                     {lang.dictionary["navlinks"][5]}
                 </Link>

@@ -34,31 +34,15 @@ function MainNavigation(props) {
         };
     }, []);
 
-    function scrollSmoothTo(elementId) {
-        navigate("/");
-        setTimeout(() => {
-            var element = document.getElementById(elementId);
-            element.scrollIntoView({
-                block: "start",
-                behavior: 'smooth',
-
-            });
-        }, 100);
-
-    }
 
     return (
-        <div className={'header'}
-            style={scrolled ? {
-                background: 'linear-gradient( 180deg,rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1),rgba(255, 255, 255, 0.8))',
-                padding: "1rem 0",
-
-            } : null}
+        <div className={scrolled ? 'header header_scroll' : 'header '}
+            style={drawerIsOpen ? { backgroundColor: "#fff" } : null}
         >
 
 
             {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
-            {
+            {/* {
                 <SideDrawer show={drawerIsOpen}
                     style={{ top: '80px', paddingTop: '100px' }}
                 >
@@ -68,23 +52,26 @@ function MainNavigation(props) {
                         onClick={props.onClick}
                         closeDrawer={closeDrawerHandler}
                     />
-                    <SocialBar />
+                    
                 </SideDrawer>
-            }
+            } */}
 
-            <div className={'main_header'}>
+            <div className={drawerIsOpen ? 'main_header main_header-mobile' : 'main_header'}
+            // style={drawerIsOpen ? { height: "380px" } : { height: "40px" }}
+            >
                 <Hamburger
                     show={drawerIsOpen}
                     onClick={openDrawerHandler}
                 />
-                {/* <NavLink to='/' onClick={() => {
-                    scrollSmoothTo('hero')
-                    setDrawerIsOpen(false);
-                }}>
+                <NavLink onClick={() => {
+                    setDrawerIsOpen(true);
+                }} className='logo-wrapper'>
                     <img src={logo} alt='logo' className='logo' />
-                </NavLink> */}
+                </NavLink>
 
-                <NavLinks />
+                <NavLinks closeDrawer={() => {
+                    setDrawerIsOpen(false);
+                }} />
 
             </div>
 

@@ -16,6 +16,7 @@
     cursor: pointer;
     display: block;
     transform: scale(0.8);
+    margin-left: auto;
   }
   /* #nav-icon.open {
     width: 20px;
@@ -26,7 +27,7 @@
     position: absolute;
     height: 3px;
     width: 100%;
-    background: var(--secondary-color);
+    background: #fff;
     border-radius: 9px;
     opacity: 1;
     left: 0;
@@ -56,6 +57,9 @@
   }
   #nav-icon:hover span {
     width: 100%;
+  }
+  #nav-icon.open span {
+    background: var(--secondary-color);
   }
   #nav-icon.open span:nth-child(1) {
     top: 8px;

@@ -1,110 +1,21 @@
 {
   "navlinks": [
-    "Hakkımızda",
-    "Galeri",
-    "Yorumlar",
-    "Konsept",
-    "İletişim"
+    "Home",
+    "About",
+    "Services",
+    "Gallery",
+    "Testimonials",
+    "Contact"
   ],
-  "hero-title": "Fethiye'deki eviniz,",
-  "hero-title_span": "MoniHomes",
-  "hero-search-btn": "Ara",
-  "about_items": [
-    "rahat odalar",
-    "tam donanımlı mutfaklar",
-    "klima",
-    "ücretsiz wifi",
-    "çamaşır ve kurutma makinesi",
-    "mükemmel konum",
-    "otopark",
-    "ödeme seçenekleri",
-    "ilgili ev sahibi"
+  "email_success": [
+    "The mail has been sent successfully",
+    "Thank you."
   ],
-  "about_desc": "Hizmet standartlarının ne olduğunu biliyoruz ve size Fethiye'de en iyi deneyimi yaşatmak için elimizden gelenin en iyisini yapıyoruz! Kapılarımız sizler için her zaman açık!",
-  "is_loading": "Yükleniyor...",
-  "partner_title": "Belki bunlar ilginizi çekebilir...",
-  "villa_masal": "Villa Masal",
-  "villa_yoyo": "Yoyo Tinyhouse",
-  "bank_acoount": [
-    "Banka Hesabı Bilgileri",
-    "Hesap No :",
-    "Şube",
-    "IBAN",
-    "Ad Soyad / Unvan"
-  ],
-  "google-btn": "Tüm yorumları göster",
-  "whatsup_status": "Genellikle 30 dakika içinde yanıt verir",
-  "whatsup_message": "Merhaba! 🤝 \nNasıl yardımcı olabiliriz?",
-  "whatsup_placeholder": "Mesaj yazın..",
-  "concept": "Konsept",
-  "concept_page": [
-    {
-      "section-title": "Monihomes",
-      "section-id": "monihomes",
-      "section-buttons": [
-        "Odalar",
-        "Lokasyon",
-        "Özellikler"
-      ],
-      "section-desc": [
-        "Bu küçük şirin apart otelde kendinizi evinizde hissedeceksiniz. Mutfak, ütü, otopark, wifi.. Kısacası her türlü ihtiyacınızı karşılamaya hazırız. Odalarımız 3 kişilik olup 2 odamız balkonludur. Ve misafirlerimiz için ücretsiz otoparkımız mevcuttur.",
-        "Otelimiz tam olarak şehir merkezinde yer almaktadır. Fethiye'nin güzide plajlarına toplu taşıma ile 10 dakikada ulaşabilirsiniz. Kordon 3 dakika uzaklıkta olup, tarihi Paspatur caddesinde alışveriş yapabilir, meşhur balık pazarında inanılmaz deniz ürünlerinin tadını çıkarabilirsiniz."
-      ],
-      "section-features": [
-        "Konfor",
-        "Mutfak",
-        "Klima",
-        "Ücretsiz Wifi",
-        "Mükemmel konum",
-        "Otopark",
-        "Çamaşır makinesi",
-        "Kurutma makinesi"
-      ]
-    },
-    {
-      "section-title": "Villa Masal",
-      "section-id": "villamasal",
-      "section-buttons": [
-        "Odalar",
-        "Lokasyon",
-        "Özellikler"
-      ],
-      "section-desc": [
-        "Bölgenin dokusuna uygun taş mimariden oluşan, oldukça konforlu bahçe mobilyaları, havuz kenarına konumlanmış locası ve minik misafirlerimizin kullanımına yönelik mini oyun parkı ile hizmet veren villanın içi de oldukça ferah bir yapıya sahiptir. Ayrıca bir yatak odasında jakuzi bulunmakta olup sauna ve şömine keyfini sevdiklerinizle birlikte çıkarabilirsiniz.",
-        "Yerimiz Fethiye Cengiz mahallesindedir. Şehrin karmaşasından uzakta, güne kuş cıvıltıları ile başlamak, güneşin, doğanın ve havuzun tadını çıkarmak için doğru yerdesiniz.\n Önemli bir hatırlatma: Rahat bir tatil geçirebilmeniz için, villaya gitmeden önce alışverişinizi yapmanız gerekmektedir, çünkü en yakın market 12km uzaklıktadır."
-      ],
-      "section-features": [
-        "Havuz",
-        "Sauan",
-        "Jakuzi",
-        "Çift banyo",
-        "Şömine",
-        "Mutfak",
-        "Sessizlik",
-        "Oyun alanı",
-        "Doğa"
-      ]
-    },
-    {
-      "section-title": "Tekne Turu",
-      "section-id": "boat_trip",
-      "section-buttons": [
-        "Bilgi",
-        "Ücret",
-        "Güzergah"
-      ],
-      "section-desc": [
-        "Fethiye sürat teknesi, 5.50 m. boyunda ve 115 HP4 zamanli motoru ile sizlere eşsiz bir deniz turu sunmaktadır.\n Teknemiz 24 saat hizmet vermekte olup, maksimum 4 kişi misafir edebilmekteyiz. ",
-        "4 saatlik turumuz 500$ olup, tur saatini uzatmak ekstra ücrete tabidir."
-      ],
-      "section-features": [
-        "Kızıl Ada - Göcek",
-        "İnlice - Göcek koyları"
-      ]
-    }
-  ],
-  "read_more": "Devamını Oku",
-  "price_info": "Minimum 4 gece konaklama",
-  "price_night": "Gecelik",
-  "price_btn": "Fiyat Listesi"
+  "contact-form": [
+    "Your Name",
+    "Your Email*",
+    "Your Phone",
+    "Your Message*",
+    "Send Message"
+  ]
 }

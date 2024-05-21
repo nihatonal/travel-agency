@@ -1,1 +1,80 @@
 
+.ril-inner img {
+  width: 50%;
+}
+@media only screen and (max-width: 1200px) {
+  .ril-inner img {
+    width: auto;
+  }
+}
+
+.gallery-items-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  padding: 0 150px;
+}
+@media only screen and (max-width: 1000px) {
+  .gallery-items-wrapper {
+    padding: 0 50px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .gallery-items-wrapper {
+    padding: 0;
+  }
+}
+.gallery-item {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1000px) {
+  .gallery-item {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .gallery-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.2);
+  transition: all 0.3s;
+}
+.gallery-item-hover-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  opacity: 0;
+  background-color: rgba(255, 106, 79, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-item:hover > .gallery-item-hover-content {
+  opacity: 1;
+}
+.gallery-item:hover > img {
+  transform: scale(1);
+}
+
+.gallery-item-hover-content-title {
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 2px;
+}

@@ -29,12 +29,6 @@ button {
 ul {
   list-style: none;
 }
-.p-15 {
-  padding: 150px 15px;
-}
-.p-30 {
-  padding: 120px 30px;
-}
 
 .slide-in-left-enter {
   transform: translateX(-100%);
@@ -60,7 +54,6 @@ ul {
 .section_container {
   padding-top: 120px;
 }
-
 
 .section_title {
   font-family: var(--title-font-family);
@@ -96,10 +89,24 @@ ul {
   .section_title .section-suptitle {
     font-size: 60px;
     top: -36px;
-  
   }
   .section-title-separator {
     width: 70px;
     margin-top: 10px;
   }
+}
+
+@keyframes show_opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.show_opacity {
+  -webkit-animation: linear forwards;
+  -webkit-animation-name: show_opacity;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-duration: 1s;
 }

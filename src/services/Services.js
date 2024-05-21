@@ -14,7 +14,7 @@ function Services(props) {
         rootMargin: "0px",
     });
     return (
-        <div id='services' className='section_container services-container' ref={ref}>
+        <div id='services' className='section_container services-container'>
             <div className="section-wrapper service-wrapper">
 
                 <h3 className='section_title'>
@@ -22,8 +22,8 @@ function Services(props) {
                     <span className='section-suptitle'>SERVICES</span>
                     <span className='section-title-separator'></span>
                 </h3>
-                <div className="services-items-wrapper">
-                    <div className="services-items">
+                <div className="services-items-wrapper"  >
+                    <div className="services-items" ref={ref}>
                         <div className="service-item">
                             <div className="service-item-icon">
                                 <MdFlight className={inView ? "icon-in" : ""}
