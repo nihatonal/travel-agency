@@ -1,0 +1,125 @@
+/* .countries-container {
+  padding: 100px 150px;
+} */
+.countries-wrapper {
+  padding: 50px 150px 100px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 10px;
+}
+.column {
+  flex: 33.33%;
+  max-width: 33.33%;
+  /* padding: 20px; */
+  /* padding: 0 4px; */
+}
+.column:nth-last-child(2) {
+  padding: 0 10px;
+}
+.column:nth-last-child(3) {
+  padding-right: 20px;
+}
+.column:nth-last-child(1) {
+  padding-left: 20px;
+}
+
+.column .countries-item {
+  margin-top: 20px;
+  vertical-align: middle;
+  transition: all ease-in-out 0.2s;
+}
+.column .countries-item:hover {
+  box-shadow: 3px 3px 10px rgba(192, 192, 192, 0.8);
+}
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+.countries-item {
+  font-family: var(--primary-font-family);
+  font-weight: normal;
+  padding: 30px 30px;
+  background-color: #fff;
+  border-radius: 6px;
+}
+.country_img_wrapper {
+  overflow: hidden;
+}
+.countries-item img {
+  width: 100%;
+  margin-bottom: 10px;
+  transform: scale(1.35);
+  transition: all ease-in-out 0.5s;
+}
+.column .countries-item:hover img {
+  transform: scale(1.2);
+}
+.countries-item-title {
+  line-height: 1.33333;
+  font-size: 16px;
+  opacity: 0.8;
+}
+.countries-item-motto {
+  line-height: 1.33333;
+  font-size: 24px;
+  color: var(--secondary-color);
+  margin: 2px 0 14px;
+}
+.countries-item-info {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #7a7a7a;
+  text-align: left;
+}
+.countries-item a {
+  display: block;
+  font-family: var(--primary-font-family);
+  font-weight: normal;
+  color: var(--secondary-color);
+  padding-top: 20px;
+  padding-right: 20px;
+  text-align: right;
+}
+.countries-item a:hover {
+  transition: all 0.3s;
+  color: #000;
+}
+@media only screen and (max-width: 1000px) {
+  .countries-container {
+    padding: 150px 50px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .countries-container {
+    padding: 100px 0;
+  }
+}
+
+@keyframes item-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+.country-in {
+  animation-name: item-in;
+  animation-duration: 1000ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}

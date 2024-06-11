@@ -1,0 +1,47 @@
+.create-tourist-wrapper {
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+.create-tourist-wrapper form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 20px;
+  column-gap: 20px;
+}
+.form-control:nth-child(1),
+.form-control:nth-child(6),
+.create-tourist-wrapper form button {
+  grid-column: 1 / span 2;
+}
+@media only screen and (max-width: 767px) {
+  .create-tourist-wrapper {
+    width: 100%;
+  }
+  .create-tourist-wrapper form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+.create-tourist-wrapper form .form-control input {
+  margin: 0;
+}
+
+.create-success {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: aliceblue;
+}
+.create-success p {
+  font-weight: 600;
+  font-family: var(--primary-font-family);
+  font-size: 24px;
+  margin-left: 150px;
+}

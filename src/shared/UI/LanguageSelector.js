@@ -9,14 +9,14 @@ import "./LanguageSelector.css";
 export default function LanguageSelector(props) {
   const { userLanguage, userLanguageChange } = useContext(LanguageContext);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("en");
+  const [selectedOption, setSelectedOption] = useState("ru");
   const [selectedFlag, setSelectedFlag] = useState('');
 
   useEffect(() => {
     const defaultLanguage = localStorage.getItem("rcml-lang");
     setSelectedOption(defaultLanguage);
     if (!defaultLanguage) {
-      setSelectedFlag("Eng");
+      setSelectedFlag("Рус");
     }
     if (defaultLanguage === "en") {
       setSelectedFlag("Eng");

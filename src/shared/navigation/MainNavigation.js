@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from "react-router-dom";
 import NavLinks from './NavLinks';
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/logo.svg';
 import Hamburger from './Hamburger';
-import SideDrawer from './SideDrawer';
+// import SideDrawer from './SideDrawer';
 import Backdrop from '../UI/Backdrop';
-import SocialBar from './SocialBar';
+// import SocialBar from './SocialBar';
 
 import './MainNavigation.css';
 function MainNavigation(props) {
     const navigate = useNavigate();
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const pathname = window.location.pathname;
     const openDrawerHandler = () => {
         setDrawerIsOpen(!drawerIsOpen);
     };
@@ -36,13 +37,14 @@ function MainNavigation(props) {
 
 
     return (
-        <div className={scrolled ? 'header header_scroll' : 'header '}
-            style={drawerIsOpen ? { backgroundColor: "#fff" } : null}
-        >
+        <>{pathname !== "" ?
+            <div className={scrolled || drawerIsOpen ? 'header header_scroll' : 'header '}
+                style={drawerIsOpen ? { backgroundColor: "#fff" } : null}
+            >
 
 
-            {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
-            {/* {
+                {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
+                {/* {
                 <SideDrawer show={drawerIsOpen}
                     style={{ top: '80px', paddingTop: '100px' }}
                 >
@@ -56,26 +58,33 @@ function MainNavigation(props) {
                 </SideDrawer>
             } */}
 
-            <div className={drawerIsOpen ? 'main_header main_header-mobile' : 'main_header'}
-            // style={drawerIsOpen ? { height: "380px" } : { height: "40px" }}
-            >
-                <Hamburger
-                    show={drawerIsOpen}
-                    onClick={openDrawerHandler}
-                />
-                <NavLink onClick={() => {
-                    setDrawerIsOpen(true);
-                }} className='logo-wrapper'>
-                    <img src={logo} alt='logo' className='logo' />
-                </NavLink>
+                <div className={drawerIsOpen ? 'main_header main_header-mobile' : 'main_header'}
+                // style={drawerIsOpen ? { height: "380px" } : { height: "40px" }}
+                >
 
-                <NavLinks closeDrawer={() => {
-                    setDrawerIsOpen(false);
-                }} />
+                    <Hamburger
+                        show={drawerIsOpen}
+                        onClick={openDrawerHandler}
+                    />
+                    <NavLink onClick={() => {
+                        setDrawerIsOpen(true);
 
-            </div>
+                    }} className='logo-wrapper'
+                    >
+                        <img src={logo} alt='logo' className='logo' />
+                    </NavLink>
 
-        </div >
+                    <NavLinks closeDrawer={() => {
+                        navigate('/', { state: { id: "countries" } });
+                        setDrawerIsOpen(false);
+                    }} />
+
+                </div>
+
+            </div> : null
+        }
+
+        </>
     );
 }
 

@@ -1,0 +1,110 @@
+.crop-container {
+  position: relative;
+  width: 236px;
+  height: 236px;
+  background: linear-gradient(to right, #cbd4e1 8px, transparent 8px) 0 0,
+    linear-gradient(to right, #cbd4e1 8px, transparent 8px) 0 100%,
+    linear-gradient(to left, #cbd4e1 8px, transparent 8px) 100% 0,
+    linear-gradient(to left, #cbd4e1 8px, transparent 8px) 100% 100%,
+    linear-gradient(to bottom, #cbd4e1 8px, transparent 8px) 0 0,
+    linear-gradient(to bottom, #cbd4e1 8px, transparent 8px) 100% 0,
+    linear-gradient(to top, #cbd4e1 8px, transparent 8px) 0 100%,
+    linear-gradient(to top, #cbd4e1 8px, transparent 8px) 100% 100%;
+
+  background-repeat: no-repeat;
+  background-size: 70px 70px;
+}
+/* .profile-image-crop-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+.profile-image-crop-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 6px;
+}
+.profile-image-crop-container h5 {
+  font-family: var(--primary-font-family);
+  font-size: 16px;
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+.reactEasyCrop_CropArea {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+.hidden {
+  display: none;
+}
+
+.modal-crop-wrapper {
+  width: 450px;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: #e6e4e4;
+  display: none;
+  z-index: 99;
+  box-shadow: 2px 2px 5px #afafaf;
+}
+@media only screen and (max-width: 767px) {
+  .modal-crop-wrapper {
+    width: 100%;
+  }
+}
+.crop-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 10px;
+  margin-top: 10px;
+}
+.crop-btn {
+  font-family: var(--primary-font-family);
+  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--primary-color);
+  padding: 6px 20px;
+  cursor: pointer;
+  background-color: #0060f0dc;
+  color: #fff;
+  transition: all ease 0.1s;
+}
+.crop-btn:nth-child(2):hover {
+  background-color: #085edf;
+}
+.cancel-btn {
+  background-color: rgb(250, 36, 100);
+  color: #fff;
+}
+.cancel-btn:hover {
+  background-color: var(--color_danger);
+}
+
+.slider-btn-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 4px;
+  margin: 0 auto;
+}
+.icon-btn {
+  background-color: transparent;
+  opacity: 0.5;
+}
+.crop-image-container {
+  box-shadow: 4px 4px 10px #afafaf;
+  background-color: #d8d6d677;
+  border-radius: 4px;
+}
+.cursor-pointer img {
+  border-radius: 50%;
+}

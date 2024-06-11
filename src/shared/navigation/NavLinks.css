@@ -5,6 +5,7 @@
   justify-content: space-between;
   align-items: center;
   transition: all 750ms;
+  position: relative;
 }
 @media only screen and (max-width: 1000px) {
   .navbar {

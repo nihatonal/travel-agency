@@ -18,6 +18,7 @@ body {
   height: auto;
   width: 100%;
   overflow-x: clip;
+  background-color: #f0f5f8b6;
 }
 a {
   text-decoration: none;
@@ -109,4 +110,51 @@ ul {
   -webkit-animation-name: show_opacity;
   -webkit-animation-timing-function: ease-in-out;
   -webkit-animation-duration: 1s;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  cursor: pointer;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ff694f56;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ff694f75;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ff694fb2;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  min-height: 40px;
+  text-align: center;
+  font-size: 16px;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-family: var(--primary-font-family);
+  border: 3px solid var(--secondary-color);
+  background: var(--secondary-color);
+  transition: all 500ms ease;
+  cursor: pointer;
+  color: #fff;
+  margin-top: 20px;
+}
+.btn:hover {
+  background-color: transparent;
+  color: #000;
+  transition: all 500ms ease;
 }
