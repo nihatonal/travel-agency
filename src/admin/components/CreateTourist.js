@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
+import DropdownList from "react-widgets/DropdownList";
 import { v4 as uuid } from "uuid";
 import Input from '../../shared/components/Input'
 import {
@@ -10,17 +11,25 @@ import { useForm } from "../../shared/hooks/form-hook";
 import ErrorModal from '../../shared/UI/ErrorModal';
 import SuccessModal from '../../shared/UI/SuccessModal';
 import PropagateLoader from "react-spinners/PropagateLoader";
+import { LanguageContext } from "../../shared/context/Language";
 
+import "react-widgets/styles.css";
 import './CreateTourist.css';
 
 function CreateTourist(props) {
     const navigate = useNavigate();
     const location = useLocation();
+    const lang = useContext(LanguageContext);
     // const [error, setError] = useState(false);
     const { error, isLoading, sendRequest, clearError } = useHttpClient();
     const [success, setSuccess] = useState(false);
+    const [country, setCountry] = useState();
+    const [city, setCity] = useState();
     const unique_id = uuid().slice(0, 8);
-    console.log(location.state)
+    const sectionData = lang.dictionary["country_info"];
+    const resorts = lang.dictionary["resorts"];
+
+
     const [formState, inputHandler] = useForm(
         {
             touristname: {
@@ -32,14 +41,6 @@ function CreateTourist(props) {
                 isValid: false,
             },
             touristphone: {
-                value: "",
-                isValid: false,
-            },
-            country: {
-                value: "",
-                isValid: false,
-            },
-            city: {
                 value: "",
                 isValid: false,
             },
@@ -72,12 +73,13 @@ function CreateTourist(props) {
                     touristphone: formState.inputs.touristphone.value,
                     touristcode: unique_id,
                     image: "",
-                    country: formState.inputs.country.value,
-                    city: formState.inputs.city.value,
+                    country: country.country,
+                    country_id: country.id,
+                    city: city,
                     otel: formState.inputs.otel.value,
                     date: formState.inputs.date.value,
                     cost: formState.inputs.cost.value,
-                    link: `http://localhost:3000/writecomment/${formState.inputs.touristname.value.toLowerCase().replace(/\s+/g, '')}/${formState.inputs.city.value.toLowerCase().replace(/\s+/g, '')}/${formState.inputs.otel.value.toLowerCase().replace(/\s+/g, '')}`,
+                    link: `http://localhost:3000/writecomment/${formState.inputs.touristname.value.toLowerCase().replace(/\s+/g, '')}/${city.toLowerCase().replace(/\s+/g, '')}/${formState.inputs.otel.value.toLowerCase().replace(/\s+/g, '')}`,
                     comment: ''
                 }),
                 {
@@ -93,9 +95,6 @@ function CreateTourist(props) {
         }
     };
 
-
-
-
     return (
         <React.Fragment>
             <ErrorModal error={error} onClear={clearError} />
@@ -107,6 +106,7 @@ function CreateTourist(props) {
                     <div className='create-tourist-container'>
                         <div className="create-tourist-wrapper">
                             <form onSubmit={createTourist}>
+
                                 <Input
                                     id="touristname"
                                     element="input"
@@ -143,7 +143,32 @@ function CreateTourist(props) {
                                     initialValid={true}
 
                                 />
-                                <Input
+                                <div>
+                                    <span className='select_label'>Country</span>
+                                    <DropdownList
+
+                                        dataKey="id"
+                                        defaultValue={sectionData.map((country) => {
+                                            return {
+                                                id: country.country_id
+                                                , country: country.country
+                                            }
+                                        })[0]}
+                                        textField="country"
+                                        value={country}
+                                        onChange={(nextValue) => {
+                                            setCity(resorts.filter((item) => item.resort_id === nextValue.id)[0].resorts[0])
+                                            setCountry(nextValue)
+                                        }}
+                                        data={sectionData.map((country) => {
+                                            return {
+                                                id: country.country_id
+                                                , country: country.country
+                                            }
+                                        })}
+                                    />
+                                </div>
+                                {/* <Input
                                     id="country"
                                     element="input"
                                     type="text"
@@ -152,8 +177,39 @@ function CreateTourist(props) {
                                     validators={[VALIDATOR_REQUIRE()]}
                                     onInput={inputHandler}
 
-                                />
-                                <Input
+                                /> */}
+                                <div>
+                                    <span className='select_label'>City</span>
+                                    <DropdownList
+                                        dataKey="id"
+                                        defaultValue={
+                                            resorts.filter((item) => item.resort_id ===
+                                                sectionData.map((country) => {
+                                                    return {
+                                                        id: country.country_id
+                                                        , country: country.country
+                                                    }
+                                                })[0].id
+                                            )[0].resorts[0]
+
+
+                                        }
+                                        value={city}
+                                        onChange={(nextValue) => setCity(nextValue)}
+
+                                        data={country ? resorts.filter((item) => item.resort_id === country.id)[0].resorts :
+                                            resorts.filter((item) => item.resort_id ===
+                                                sectionData.map((country) => {
+                                                    return {
+                                                        id: country.country_id
+                                                        , country: country.country
+                                                    }
+                                                })[0].id
+                                            )[0].resorts
+                                        }
+                                    />
+                                </div>
+                                {/* <Input
                                     id="city"
                                     element="input"
                                     type="text"
@@ -162,7 +218,7 @@ function CreateTourist(props) {
                                     validators={[VALIDATOR_REQUIRE()]}
                                     onInput={inputHandler}
 
-                                />
+                                /> */}
                                 <Input
                                     id="otel"
                                     element="input"

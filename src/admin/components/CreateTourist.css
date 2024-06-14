@@ -45,3 +45,32 @@
   font-size: 24px;
   margin-left: 150px;
 }
+
+.rw-widget-picker {
+  border: 1px solid transparent;
+  border-bottom: 1px solid #cdcdcd;
+  border-radius: 0;
+}
+
+.rw-widget-input,
+.rw-list-option {
+  box-shadow: none;
+  color: var(--primary-color);
+  font-family: var(--primary-font-family);
+}
+.rw-dropdown-list-input {
+  padding: 0;
+}
+.rw-state-focus .rw-widget-picker.rw-widget-input {
+  box-shadow: none;
+}
+.rw-state-focus .rw-widget-picker {
+  border: 1px solid transparent;
+  border-bottom: 1px solid #000;
+  border-radius: 0;
+}
+.select_label {
+  font-family: var(--primary-font-family);
+  font-weight: bold;
+  font-size: 16px;
+}

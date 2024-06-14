@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import PropagateLoader from "react-spinners/PropagateLoader";
@@ -7,14 +7,18 @@ import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../shared/context/auth-context';
 import TourCard from './TourCard.js';
 import { FaUserCircle } from "react-icons/fa";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { FaMinus } from "react-icons/fa";
 import Modal from '../../shared/UI/Modal'
 import './TouristDetails.css';
 
 function TouristDetails(props) {
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation()
     const { isLoading, sendRequest } = useHttpClient();
     const [loadedTourist, setLoadedTourist] = useState([]);
+    const [show, setShow] = useState(false)
 
     const temail = useParams().temail;
 
@@ -67,7 +71,9 @@ function TouristDetails(props) {
 
     return (
         <div className="admin-content-wrapper">
-
+            <NavLink to={`/tourists/touristlist`} className='back_arrow'>
+                <FaArrowLeftLong />
+            </NavLink>
             <div className="admin-content">
                 <div className="tourist-details-header">
                     {loadedTourist.length > 0 && loadedTourist[0].image !== "" ?
@@ -91,7 +97,16 @@ function TouristDetails(props) {
 
                         } ₽</p>
                     </div>
+                    <div className="add-tour-link">
+                        <NavLink
+                            to="/admin/tourists/addtourist"
+                            state={[location.state[0], location.state[1], location.state[2]]}
+                        >
+                            Add Tour
+                        </NavLink>
+                    </div>
                 </div>
+
 
                 {/* <a href='tel:+905308997709' target='_blank' rel='noopener noreferrer'
                             className="contact_info_item">
@@ -115,43 +130,74 @@ function TouristDetails(props) {
                     <div className="tourists-wrapper">
 
                         {loadedTourist && loadedTourist.map((item) =>
-
-                            <TourCard
-                                data={item}
-                                key={item.id}
-                                deleteWarningHandler={showDeleteWarningHandler}
-                            >
-                                <Modal
-                                    show={showConfirmModal}
-                                    onCancel={cancelDeleteHandler}
-                                    header="Are you sure?"
-                                    footerClass="place-item__modal-actions"
-                                    footer={
-                                        <React.Fragment>
-                                            <div className="tourist-card-btns">
-                                                <button className='btn btn-tourist-card submit-btn' inverse onClick={cancelDeleteHandler}>
-                                                    CANCEL
-                                                </button>
-                                                <button className='btn btn-tourist-card delete-btn' onClick={() => { confirmDeleteHandler(item.id) }}>
-                                                    DELETE
-                                                </button>
-                                            </div>
-                                        </React.Fragment>
-                                    }
+                            <div className="tourists-wrapper-item" key={item.id}>
+                                <div className="tourists-wrapper_header" onClick={() => setShow(item.id)}
+                                    style={show === item.id ? {
+                                        backgroundColor: "var(--secondary-color)",
+                                        color: "#fff"
+                                    } : {}}
                                 >
-                                    <p>
-                                        Do you want to proceed and delete this place? Please note that it
-                                        can't be undone thereafter.
-                                    </p>
-                                </Modal>
-                            </TourCard>
+                                    <h4 className="tourists-wrapper-title">{item.otel}</h4><FaMinus
+                                        style={show === item.id ? {
+                                            color: "#fff"
+                                        } : {}}
+                                        className='minus-tire' />
+                                    <h4 className="tourists-wrapper-title">{item.country}</h4><FaMinus
+                                        style={show === item.id ? {
+                                            color: "#fff"
+                                        } : {}}
+                                        className='minus-tire' />
+                                    {/* <h4 className="tourists-wrapper-title">{item.city}</h4><FaMinus
+                                        style={show === item.id ? {
+                                            color: "#fff"
+                                        } : {}}
+                                        className='minus-tire' /> */}
+                                    <h4 className="tourists-wrapper-title">{item.date}</h4>
+
+                                </div>
+                                <TourCard
+                                    data={item}
+                                    key={item.id}
+                                    deleteWarningHandler={showDeleteWarningHandler}
+                                    // style={show !== item.id ?
+                                    //     { height: "0", padding: "0", marginBottom: "0" } :
+                                    //     { height: "320px", padding: "30px 50px", marginBottom: "30px" }}
+                                    className={show !== item.id ? "" : "tourist-card-wrapper_open"}
+                                    onClick={() => setShow(item.id)}
+                                >
+                                    <Modal
+                                        show={showConfirmModal}
+                                        onCancel={cancelDeleteHandler}
+                                        header="Are you sure?"
+                                        footerClass="place-item__modal-actions"
+                                        footer={
+                                            <React.Fragment>
+                                                <div className="tourist-card-btns">
+                                                    <button className='btn btn-tourist-card submit-btn' inverse onClick={cancelDeleteHandler}>
+                                                        CANCEL
+                                                    </button>
+                                                    <button className='btn btn-tourist-card delete-btn' onClick={() => { confirmDeleteHandler(item.id) }}>
+                                                        DELETE
+                                                    </button>
+                                                </div>
+                                            </React.Fragment>
+                                        }
+                                    >
+                                        <p>
+                                            Do you want to proceed and delete this place? Please note that it
+                                            can't be undone thereafter.
+                                        </p>
+                                    </Modal>
+                                </TourCard>
+                            </div>
 
                         )}
+
 
                     </div>
                 }
             </div>
-        </div>
+        </div >
     );
 }
 

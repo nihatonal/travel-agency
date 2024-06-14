@@ -3,20 +3,22 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useHttpClient } from "../shared/hooks/http-hook";
 import { AuthContext } from '../shared/context/auth-context';
 import Login from './components/Login';
-import BasicSelect from '../shared/components/BasicSelect';
-import DestinationChartCountry from './components/DestinationChartCountry';
-import DestinationChartCity from './components/DestinationChartCity';
-import Destinations from './components/Destinations';
-import MonthsChart from './components/MonthsChart';
+
+import ByCountryChart from './components/ByCountryChart';
+import ByCityChart from './components/ByCityChart';
+import ByYearChart from './components/ByYearChart';
+import { IoMdArrowDropdown } from "react-icons/io";
+import { IoMdArrowDropup } from "react-icons/io";
 import "./Admin.css"
 
 function Admin(props) {
     const auth = useContext(AuthContext);
     const { isLoading, sendRequest } = useHttpClient();
     const [loadedTourists, setLoadedTourists] = useState([]);
-    const [filteredData, setFilteredData] = useState([])
-    const [year, setYear] = useState();
-    const [yearData, setYeardata] = useState([])
+
+
+    const [show, setShow] = useState(false);
+
 
     function onlyUnique(value, index, array) {
         return array.indexOf(value) === index;
@@ -28,25 +30,67 @@ function Admin(props) {
                     `http://localhost:5000/api/tourists/gettourists`
                 );
                 setLoadedTourists(responseData.tourists);
-                setFilteredData(responseData.tourists);
-                setYeardata(["All"].concat(responseData.tourists.map((item) => item.date.slice(0, 4)).filter(onlyUnique).sort()));
+
             } catch (err) { }
         };
         fetchPlace();
     }, [sendRequest]);
 
-
-    const handleChange = (event) => {
-        event.preventDefault();
-        setYear(event.target.id);
-        const filter = filteredData.filter((item) => item.date.slice(0, 4) === event.target.id);
-        if (event.target.id === "All") {
-            setLoadedTourists(filteredData)
-        } else {
-            setLoadedTourists(filter)
+    function compareNumbers(a, b) {
+        return b - a;
+    }
+    const years = function (startYear) {
+        var currentYear = new Date().getFullYear() + 1, years = [];
+        startYear = startYear || 2023;
+        while (startYear <= currentYear) {
+            years.push(startYear++);
         }
+        return years.sort(compareNumbers).map((item) => { return { year: item.toString(), checked: true } });
+    }
 
+    const allToppings = years(2023);
+
+    const [selected, setSelected] = useState(allToppings);
+
+
+    const [all, setAll] = useState(false);
+
+    const Checkbox = ({ isChecked, label, checkHandler, index }) => {
+        return (
+            <label className="option-item" >
+                <input
+                    type="checkbox"
+                    id={`checkbox-${index}`}
+                    checked={isChecked}
+                    onChange={checkHandler}
+
+                />
+                {label}
+            </label>
+        )
     };
+
+    const updateCheckStatus = index => {
+        setSelected(
+            selected.map((topping, currentIndex) =>
+                currentIndex === index
+                    ? { ...topping, checked: !topping.checked }
+                    : topping
+            )
+        );
+
+    }
+
+
+    useEffect(() => {
+
+        setSelected(
+            all ?
+                selected.map(topping => ({ ...topping, checked: true })) :
+                selected.map(topping => ({ ...topping, checked: false }))
+        )
+
+    }, [all])
 
     return (
         <div className="admin_container">
@@ -55,28 +99,76 @@ function Admin(props) {
                     <h3 className="admin-content-title">Wellcome!</h3>
                     <div className="year_select_wrapper">
                         <div className="year_select_item">
-                            <BasicSelect
-                                data={yearData}
-                                label="Year"
-                                onClick={handleChange}
-                                value={year}
-                            />
+
+                            <div className='select-container'
+
+                            >
+                                <span></span>
+                                <span></span>
+                                <p className="select-label">Filter</p>
+                                <div></div>
+                                <p className="select-label-option" onClick={() => setShow(!show)}>
+                                    Year
+                                    {!show ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}
+                                </p>
+
+                                <div className="select-options"
+                                    style={show ?
+                                        { height: `144px` } :
+                                        { height: "0" }
+                                    }
+                                >
+                                    <label className="option-item" htmlFor={`checkbox-all`}>
+                                        <input
+                                            type="checkbox"
+                                            id={`checkbox-all`}
+                                            checked={all}
+                                            onChange={() => setAll(!all)}
+                                        />
+                                        All
+                                    </label>
+                                    {
+                                        selected.map((year, index) => (
+                                            <Checkbox
+                                                key={year.year}
+                                                isChecked={year.checked}
+                                                checkHandler={() => updateCheckStatus(index)}
+                                                label={year.year}
+                                                index={index}
+                                            />
+                                        ))
+                                    }
+                                </div>
+                            </div >
                         </div>
                     </div>
 
                     {loadedTourists.length >= 1 && <div className="admin-home-page">
                         <div className="admin-home-page-items">
-                        <div className="admin-home-page-item">
-                                <Destinations data={loadedTourists} />
+                            <div className="admin-home-page-item">
+                                <ByCountryChart data={loadedTourists}
+                                    years={
+                                        selected.filter(x => x.checked).map((item) => item.year)}
+                                />
+                            </div>
+                            <div className="admin-home-page-item">
+                                <ByCityChart data={loadedTourists}
+                                    years={selected.filter(x => x.checked).map((item) => item.year)}
+                                />
+                            </div>
+                            <div className="admin-home-page-item">
+                                <ByYearChart data={loadedTourists}
+                                    years={selected.filter(x => x.checked).map((item) => item.year)}
+                                />
                             </div>
                             {/* <div className="admin-home-page-item">
                                 <DestinationChartCountry data={loadedTourists} />
                             </div>
                             <div className="admin-home-page-item">
                                 <DestinationChartCity data={loadedTourists} />
-                            </div>
-                            <div className="admin-home-page-item">
-                                <MonthsChart data={loadedTourists} label={year} />
+                            </div> */}
+                            {/* <div className="admin-home-page-item">
+                                <MonthsChart data={loadedTourists} label={years(2023)} />
                             </div> */}
                         </div>
                     </div>}

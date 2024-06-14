@@ -1,24 +1,31 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Input from '../../shared/components/Input';
 import { AuthContext } from '../../shared/context/auth-context';
 import { useParams } from 'react-router-dom';
+import DropdownList from "react-widgets/DropdownList";
 import {
     VALIDATOR_REQUIRE
 } from "../../shared/util/validators.js";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { useForm } from "../../shared/hooks/form-hook";
 import PropagateLoader from "react-spinners/PropagateLoader";
-
+import { LanguageContext } from "../../shared/context/Language";
+import { FaArrowLeftLong } from "react-icons/fa6";
 import './UpdateTourist.css';
 
 function UpdateTourist(props) {
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
+    const lang = useContext(LanguageContext);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [success, setSuccess] = useState(false);
     const touristId = useParams().tid;
-    const [loadedTourist, setLoadedTourist] = useState({})
+    const [loadedTourist, setLoadedTourist] = useState({});
+    const [country, setCountry] = useState();
+    const [city, setCity] = useState();
+    const sectionData = lang.dictionary["country_info"];
+    const resorts = lang.dictionary["resorts"];
 
     const [formState, inputHandler, setFormData] = useForm(
         {
@@ -27,14 +34,6 @@ function UpdateTourist(props) {
                 isValid: false,
             },
             touristemail: {
-                value: "",
-                isValid: false,
-            },
-            country: {
-                value: "",
-                isValid: false,
-            },
-            city: {
                 value: "",
                 isValid: false,
             },
@@ -61,16 +60,9 @@ function UpdateTourist(props) {
                     `http://localhost:5000/api/tourists/${touristId}`
                 );
                 setLoadedTourist(responseData.tourist);
+
                 setFormData(
                     {
-                        country: {
-                            value: responseData.tourist.location,
-                            isValid: true,
-                        },
-                        city: {
-                            value: responseData.tourist.location,
-                            isValid: true,
-                        },
                         otel: {
                             value: responseData.tourist.otel,
                             isValid: true,
@@ -91,15 +83,19 @@ function UpdateTourist(props) {
         fetchPlace();
     }, [sendRequest, touristId, setFormData]);
 
+
+
     const updateTourist = async (e) => {
         e.preventDefault();
         try {
             await sendRequest(
-                `http://localhost:5000/api/tourists/updatetourist/${touristId}`,
+                process.env.REACT_APP_BACKEND_URL + `/tourists/updatetourist/${touristId}`,
+                // `http://localhost:5000/api/tourists/updatetourist/${touristId}`,
                 'PATCH',
                 JSON.stringify({
-                    country: formState.inputs.country.value,
-                    city: formState.inputs.city.value,
+                    country: country ? loadedTourist.country : country.country,
+                    country_id: country ? loadedTourist.country_id : country.id,
+                    city: city ? city : loadedTourist.city,
                     otel: formState.inputs.otel.value,
                     date: formState.inputs.date.value,
                     cost: formState.inputs.cost.value
@@ -137,6 +133,9 @@ function UpdateTourist(props) {
         <React.Fragment>
             {loadedTourist.country ?
                 <div className="admin-content-wrapper">
+                    <NavLink to={`/tourists/${loadedTourist.touristemail}`} className='back_arrow'>
+                        <FaArrowLeftLong />
+                    </NavLink>
                     <div className="admin-content">
                         <h3 className="admin-content-title">Update Tour</h3>
                         <div className='create-tourist-container'>
@@ -144,30 +143,37 @@ function UpdateTourist(props) {
 
 
                                 <form onSubmit={updateTourist}>
-                                    <Input
-                                        id="country"
-                                        element="input"
-                                        type="text"
-                                        label='Location info'
-                                        placeholder="Please write location name"
-                                        validators={[VALIDATOR_REQUIRE()]}
-                                        onInput={inputHandler}
-                                        initialValue={loadedTourist.country}
-                                        initialValid={true}
+                                    <DropdownList
 
+                                        dataKey="id"
+                                        defaultValue={loadedTourist.country}
+                                        textField="country"
+                                        value={country}
+                                        onChange={(nextValue) => {
+                                            setCity(resorts.filter((item) => item.resort_id === nextValue.id)[0].resorts[0])
+                                            setCountry(nextValue)
+                                        }}
+                                        data={sectionData.map((country) => {
+                                            return {
+                                                id: country.country_id
+                                                , country: country.country
+                                            }
+                                        })}
                                     />
-                                    <Input
-                                        id="city"
-                                        element="input"
-                                        type="text"
-                                        label='Location info'
-                                        placeholder="Please write location name"
-                                        validators={[VALIDATOR_REQUIRE()]}
-                                        onInput={inputHandler}
-                                        initialValue={loadedTourist.city}
-                                        initialValid={true}
+                                    <div>
+                                        <span className='select_label'>City</span>
+                                        <DropdownList
+                                            dataKey="id"
+                                            defaultValue={loadedTourist.city}
+                                            value={city}
+                                            onChange={(nextValue) => setCity(nextValue)}
 
-                                    />
+                                            data={country ? resorts.filter((item) => item.resort_id === country.id)[0].resorts :
+                                                resorts.filter((item) => item.resort_id === loadedTourist.country_id
+                                                )[0].resorts
+                                            }
+                                        />
+                                    </div>
                                     <Input
                                         id="otel"
                                         element="input"

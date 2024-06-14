@@ -1,14 +1,31 @@
 .tourist-card-wrapper {
   font-family: var(--primary-font-family);
   color: var(--primary-color);
-  padding: 30px 50px;
+  padding: 0;
   text-align: center;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
+  overflow: hidden;
+  transition: all ease-in-out 0.3s;
+  margin-bottom: 0;
+  height: 0;
+  padding: 0 50px;
+}
+/* .tourist-card_header {
+  height: 50px;
+  padding: 30px 50px;
+} */
+.tourist-card-wrapper_open {
+  height: 320px;
+  padding: 30px 50px;
+  margin-bottom: 30px;
 }
 @media only screen and (max-width: 767px) {
-  .tourist-card-wrapper {
-    padding: 30px 10px;
+
+  .tourist-card-wrapper_open {
+    height: 320px;
+    padding: 30px 12px;
+    margin-bottom: 30px;
   }
 }
 .tourist-card-content_title {

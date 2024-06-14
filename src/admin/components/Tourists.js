@@ -74,7 +74,8 @@ function Tourists(props) {
                                             <td>{item[0].cost}</td>
                                             <td>{item.length}</td>
                                             <td className='details-btn'>
-                                                <NavLink to={`/tourists/${item[0].touristemail}`}>
+                                                <NavLink to={`/tourists/${item[0].touristemail}`}
+                                                    state={[item[0].touristname, item[0].touristemail, item[0].touristphone]}>
                                                     <GiMagnifyingGlass />
                                                 </NavLink>
                                             </td>

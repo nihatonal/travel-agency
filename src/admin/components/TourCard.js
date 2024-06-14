@@ -7,9 +7,11 @@ import './TourCard.css';
 function TourCard(props) {
     const data = props.data
     return (
-        <div className='tourist-card-wrapper'>
+        <div className={`tourist-card-wrapper ${props.className}`}
+            style={props.style}>
+
             <div className="tourist-card-content">
-                <div className="tourist-card-content_title">
+                <div className="tourist-card-content_title" >
                     <h4 className="tourist-card-title">{data.otel}</h4>
                     {/* <p>{data.location} - {moment(new Date(data.date)).format("MMMM / YYYY")}</p> */}
                 </div>

@@ -14,7 +14,7 @@ function MonthsChart(props) {
     const dates_arr = props.data.map((item) =>
         moment(new Date(item.date)).format("MMM")
     );
-
+    console.log(props.data)
 
 
     var destinations = dates_arr.reduce(function (prev, cur) {
@@ -22,9 +22,6 @@ function MonthsChart(props) {
         return prev;
     }, {});
 
-    const destinations_months = dates_arr.filter(onlyUnique);
-
-    const destination_count = Object.values(destinations)
 
     const xLabels = [
         'Jan',
@@ -60,11 +57,11 @@ function MonthsChart(props) {
                     series={[
                         {
                             data: arr,
-                            label: props.label+" year",
+                            label: props.label + " year",
                         },
                     ]}
-                    width={500}
-                    height={250}
+                    width={600}
+                    height={300}
                 />
 
             </div>
