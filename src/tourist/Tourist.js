@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "../shared/hooks/form-hook";
 
 import ErrorModal from '../shared/UI/ErrorModal';
@@ -93,7 +93,7 @@ function Tourist(props) {
         //console.log(formState.isValid, formState.inputs.comment.value, formState.inputs.touristcode.value, imageFile)
         try {
             await sendRequest(
-                `http://localhost:5000/api/tourists/savecomment/${touristId}`,
+                `${process.env.REACT_APP_BACKEND_URL}/tourists/savecomment/${touristId}`,
                 'PATCH',
                 JSON.stringify({
                     comment: formState.inputs.comment.value,

@@ -1,0 +1,42 @@
+{
+  "hosting": {
+    "public": "build",
+    "rewrites": [
+      {
+        "source": "/admin",
+        "destination": "/index.html",
+        "type": 302
+      },
+      {
+        "source": "/admin/tourists/:tid",
+        "destination": "/index.html",
+        "type": 302
+      },
+      {
+        "source": "/tourists/touristlist",
+        "destination": "/index.html",
+        "type": 302
+      },
+      {
+        "source": "/tourists/:temail",
+        "destination": "/index.html",
+        "type": 302
+      },
+      {
+        "source": "/writecomment/:name/:location/:otel/:tid",
+        "destination": "/index.html",
+        "type": 302
+      },
+      {
+        "source": "/country/:cid",
+        "destination": "/index.html",
+        "type": 302
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

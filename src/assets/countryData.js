@@ -25,7 +25,7 @@ export const countryData = {
             "src": require('./images/countries/maldives/maldives_kuhnya.png')
         }
     ],
-    tayland: [
+    thailand: [
         {
             "src": require('./images/countries/maldives/maldives_hero.jpg')
         },

@@ -1,31 +1,33 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { LanguageContext } from "../context/Language";
-import { useNavigate, useLocation } from "react-router-dom"
+import React from 'react';
+import { useLocation } from "react-router-dom"
 import { Link } from "react-scroll";
 
 import './NavLinks.css';
 function NavLinks(props) {
-    const lang = useContext(LanguageContext);
-    const navigate = useNavigate();
     const location = useLocation()
-    const [active, setActive] = useState();
 
-    useEffect(() => {
-        var element = document.getElementById(active);
-        if (element) {
-            navigate("/")
-            element.scrollIntoView({
-                block: "start",
-                behavior: "auto",
-            });
-        }
-    }, [active, navigate, location.pathname])
+
     return (
         <div className={`navbar ${props.className}`}
-            style={location.pathname === "/" ? { zIndex: 99, top: "0" } : { zIndex: -99, top: "-1000px" }}
+            style={location.pathname === "/" ? { zIndex: 99, visibility: "visible" } : { zIndex: -99, visibility: "hidden" }}
         >
-            {props.children}
-            < div className={`mobile-nav-link ${props.sidebar_nav_item_wrapper}`} >
+            {props.links.map((link) =>
+                < div className={`mobile-nav-link ${props.sidebar_nav_item_wrapper}`} key={link.link_id} >
+                    <Link
+                        className="nav-item"
+                        activeClass="active-nav-item"
+                        to={link.link_id}
+                        spy={true}
+                        smooth='easeInOutQuart'
+                        offset={0}
+                        duration={1550}
+                        onClick={props.closeDrawer}
+                    >
+                        {link.link}
+                    </Link>
+                </div >
+            )}
+            {/* < div className={`mobile-nav-link ${props.sidebar_nav_item_wrapper}`} >
                 <Link
                     className="nav-item"
                     activeClass="active-nav-item"
@@ -68,7 +70,6 @@ function NavLinks(props) {
                 </Link>
             </div>
             <div className={`mobile-nav-link ${props.sidebar_nav_item_wrapper}`}
-                onClick={() => { setActive("countries") }}
             >
                 <Link
                     className="nav-item"
@@ -78,7 +79,9 @@ function NavLinks(props) {
                     smooth='easeInOutQuart'
                     offset={0}
                     duration={1550}
-                    onClick={() => { setActive("countries") }}
+                    onClick={() => {
+                        setActive("countries");
+                    }}
                 >
                     {lang.dictionary["navlinks"][3]}
                 </Link>
@@ -124,7 +127,7 @@ function NavLinks(props) {
                 >
                     {lang.dictionary["navlinks"][6]}
                 </Link>
-            </div>
+            </div> */}
         </div >
     );
 }

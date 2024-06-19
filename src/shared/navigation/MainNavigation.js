@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import NavLinks from './NavLinks';
+import { LanguageContext } from "../context/Language";
 import logo from '../../assets/images/logo.svg';
 import Hamburger from './Hamburger';
 // import SideDrawer from './SideDrawer';
@@ -9,7 +10,10 @@ import Backdrop from '../UI/Backdrop';
 
 import './MainNavigation.css';
 function MainNavigation(props) {
+    const lang = useContext(LanguageContext);
+    const links = lang.dictionary["navlinks"];
     const navigate = useNavigate();
+    const location = useLocation()
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const pathname = window.location.pathname;
@@ -34,6 +38,19 @@ function MainNavigation(props) {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
+
+    const [active, setActive] = useState();
+
+    useEffect(() => {
+        var element = document.getElementById(active);
+        if (element) {
+            navigate("/")
+            element.scrollIntoView({
+                block: "start",
+                behavior: "auto",
+            });
+        }
+    }, [active, navigate, location.pathname]);
 
 
     return (
@@ -75,9 +92,13 @@ function MainNavigation(props) {
                     </NavLink>
 
                     <NavLinks closeDrawer={() => {
-                        navigate('/', { state: { id: "countries" } });
                         setDrawerIsOpen(false);
-                    }} />
+                        navigate('/', { state: { id: "countries" } });
+                        setActive("countries");
+
+                    }}
+                        links={links}
+                    />
 
                 </div>
 

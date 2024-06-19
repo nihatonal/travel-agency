@@ -57,7 +57,7 @@ function UpdateTourist(props) {
         const fetchPlace = async () => {
             try {
                 const responseData = await sendRequest(
-                    `http://localhost:5000/api/tourists/${touristId}`
+                    `${process.env.REACT_APP_BACKEND_URL}/tourists/${touristId}`
                 );
                 setLoadedTourist(responseData.tourist);
 

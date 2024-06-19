@@ -45,3 +45,55 @@
 .footer-nav-link-item a:hover {
   color: var(--secondary-color);
 }
+@media only screen and (max-width: 1000px) {
+  .footer-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 20px 10px;
+    justify-content: space-between;
+    row-gap: 20px;
+    column-gap: 20px;
+  }
+  .footer-motto {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    font-size: 22px;
+    text-align: center;
+  }
+  .footer-nav-links {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-nav-link-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .footer-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    padding: 20px 10px;
+    justify-content: space-between;
+    row-gap: 20px;
+    column-gap: 20px;
+  }
+  .footer-motto {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    font-size: 22px;
+    text-align: center;
+  }
+  .footer-nav-links {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-nav-link-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+  }
+}

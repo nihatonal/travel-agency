@@ -27,7 +27,7 @@ function Admin(props) {
         const fetchPlace = async () => {
             try {
                 const responseData = await sendRequest(
-                    `http://localhost:5000/api/tourists/gettourists`
+                    process.env.REACT_APP_BACKEND_URL +"/tourists/gettourists"
                 );
                 setLoadedTourists(responseData.tourists);
 

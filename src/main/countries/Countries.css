@@ -46,6 +46,7 @@
   .column {
     flex: 100%;
     max-width: 100%;
+    display: none;
   }
 }
 .countries-item {
@@ -102,9 +103,20 @@
     padding: 150px 50px;
   }
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1100px) {
   .countries-container {
     padding: 100px 0;
+  }
+  .countries-wrapper {
+    padding: 100px 0;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .countries-container {
+    padding: 120px 0 0;
+  }
+  .countries-wrapper {
+    padding: 50px 0;
   }
 }
 

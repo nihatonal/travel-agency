@@ -35,7 +35,7 @@ function TouristDetails(props) {
         const fetchPlace = async () => {
             try {
                 const responseData = await sendRequest(
-                    `http://localhost:5000/api/tourists/gettourists`
+                    process.env.REACT_APP_BACKEND_URL + "/tourists/gettourists"
                 );
                 // console.log(responseData.tourists.filter((item) => item.touristemail === temail))
                 setLoadedTourist(responseData.tourists.filter((item) => item.touristemail === temail))
@@ -54,7 +54,7 @@ function TouristDetails(props) {
 
         try {
             await sendRequest(
-                `http://localhost:5000/api/tourists/${_id}`,
+                process.env.REACT_APP_BACKEND_URL + `tourists/${_id}`,
                 'DELETE',
                 null,
                 {
@@ -71,23 +71,23 @@ function TouristDetails(props) {
 
     return (
         <div className="admin-content-wrapper">
-            <NavLink to={`/tourists/touristlist`} className='back_arrow'>
+            <NavLink to={`/ tourists / touristlist`} className='back_arrow'>
                 <FaArrowLeftLong />
             </NavLink>
             <div className="admin-content">
                 <div className="tourist-details-header">
                     {loadedTourist.length > 0 && loadedTourist[0].image !== "" ?
-                        < img src={process.env.REACT_APP_ASSETS_URL + `${loadedTourist[0].image}`} alt='profileimage' /> :
+                        < img src={process.env.REACT_APP_ASSETS_URL + `${ loadedTourist[0].image }`} alt='profileimage' /> :
                         <div className="profile_icon">
                             <FaUserCircle />
                         </div>
                     }
                     <div className="tourist-details-header-content">
                         <h3 className="tourist-details-title">{loadedTourist.length > 0 && loadedTourist[0].touristname}</h3>
-                        <a href={`mailto:${loadedTourist.length > 0 && loadedTourist[0].touristemail}`} target='_blank' rel='noopener noreferrer'>
+                        <a href={`mailto: ${ loadedTourist.length > 0 && loadedTourist[0].touristemail }`} target='_blank' rel='noopener noreferrer'>
                             <span>Email:</span>{loadedTourist.length > 0 && loadedTourist[0].touristemail}
                         </a>
-                        <a href={`tel:${loadedTourist.length > 0 && loadedTourist[0].touristphone}`} target='_blank' rel='noopener noreferrer'>
+                        <a href={`tel: ${ loadedTourist.length > 0 && loadedTourist[0].touristphone }`} target='_blank' rel='noopener noreferrer'>
                             <span>Phone:</span>{loadedTourist.length > 0 && loadedTourist[0].touristphone}
                         </a>
                         <p><span>Tours:</span>{loadedTourist.length > 0 && loadedTourist.length}</p>

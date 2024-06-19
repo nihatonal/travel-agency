@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { NavLink } from "react-router-dom"
 import { LanguageContext } from "../../shared/context/Language";
 import { countryData } from '../../assets/countryData';
+import CountriesMobile from './CountriesMobile';
 import { useInView } from "react-intersection-observer";
 import './Countries.css';
 function Countries(props) {
@@ -28,6 +29,7 @@ function Countries(props) {
                 </h3>
                 <div className="countries-wrapper" ref={ref}>
                     <div className="row">
+                        <CountriesMobile data={sectionData} />
                         <div className="column">
                             {sectionData.slice(0, Math.round(sectionData.length / 3)).map((item, index) =>
                                 <div
