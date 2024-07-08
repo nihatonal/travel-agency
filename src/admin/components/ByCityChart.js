@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
-
+import useSize from '../../shared/util/useSize';
 
 function ByCityChart(props) {
-
-    ;
+    const windowsize = useSize();
 
     function onlyUnique(value, index, array) {
         return array.indexOf(value) === index;
@@ -49,15 +48,26 @@ function ByCityChart(props) {
     };
 
 
+    const result = props.years.map((year) =>
+        destinations_list.map((item) =>
+            props.data.filter((el) => el.city === item)
+                .filter((item) =>
+                    item.date.slice(0, 4) === year
+                ).map((cost) => Number(cost.cost)).reduce((partialSum, a) => partialSum + a, 0))
+    ).map((result, index) => { return { data: result, label: props.years[index] } })
+
+
     return (
         <div>
             <div className="destination-items">
 
                 <BarChart
                     xAxis={[{ scaleType: 'band', data: destinations_list }]}
-                    series={mysteriousFn(counts)}
-                    width={500}
+                    series={props.filtered.includes("Стоимость") ? result : mysteriousFn(counts)}
+                    width={windowsize[0] > 756 ? 500 : 400}
                     height={220}
+                    margin={{ left: 70, top: 50 }}
+
                 />
 
             </div>

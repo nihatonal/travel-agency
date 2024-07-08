@@ -18,8 +18,7 @@ function UpdateTourist(props) {
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
     const lang = useContext(LanguageContext);
-    const { isLoading, error, sendRequest, clearError } = useHttpClient();
-    const [success, setSuccess] = useState(false);
+    const { isLoading, sendRequest } = useHttpClient();
     const touristId = useParams().tid;
     const [loadedTourist, setLoadedTourist] = useState({});
     const [country, setCountry] = useState();
@@ -29,14 +28,6 @@ function UpdateTourist(props) {
 
     const [formState, inputHandler, setFormData] = useForm(
         {
-            touristname: {
-                value: "",
-                isValid: false,
-            },
-            touristemail: {
-                value: "",
-                isValid: false,
-            },
             otel: {
                 value: "",
                 isValid: false,
@@ -60,6 +51,8 @@ function UpdateTourist(props) {
                     `${process.env.REACT_APP_BACKEND_URL}/tourists/${touristId}`
                 );
                 setLoadedTourist(responseData.tourist);
+                setCountry({ id: sectionData.filter((item) => item.country === responseData.tourist.country)[0].country_id, country: responseData.tourist.country })
+                setCity(responseData.tourist.city);
 
                 setFormData(
                     {
@@ -93,9 +86,9 @@ function UpdateTourist(props) {
                 // `http://localhost:5000/api/tourists/updatetourist/${touristId}`,
                 'PATCH',
                 JSON.stringify({
-                    country: country ? loadedTourist.country : country.country,
-                    country_id: country ? loadedTourist.country_id : country.id,
-                    city: city ? city : loadedTourist.city,
+                    country: country.country,
+                    country_id: country.id,
+                    city: city,
                     otel: formState.inputs.otel.value,
                     date: formState.inputs.date.value,
                     cost: formState.inputs.cost.value
@@ -105,35 +98,18 @@ function UpdateTourist(props) {
                     Authorization: 'Bearer ' + auth.token
                 }
             );
-            navigate(`/tourists/${loadedTourist.touristemail}`);
+            navigate(`/admin/touristlist/${loadedTourist.touristemail}`);
         } catch (err) { }
-        // try {
-        //     const responseData = await sendRequest(
-        //         process.env.REACT_APP_BACKEND_URL + "/tourists/savetourists",
-        //         "POST",
-        //         JSON.stringify({
-        //             touristname: formState.inputs.touristname.value,
-        //             touristemail: formState.inputs.touristemail.value,
-        //             image: "",
-        //             tour: result,
-        //         }),
-        //         {
-        //             "Content-Type": "application/json",
-        //         }
-        //     );
-        //     setSuccess(true)
-        //     console.log(responseData)
-        // } catch (err) {
-        // }
     };
-
 
 
     return (
         <React.Fragment>
             {loadedTourist.country ?
                 <div className="admin-content-wrapper">
-                    <NavLink to={`/tourists/${loadedTourist.touristemail}`} className='back_arrow'>
+                    <NavLink to={`/admin/touristlist/${loadedTourist.touristemail}`
+                        // state = { [location.state[0], location.state[1], location.state[2]]}
+                    } className='back_arrow'>
                         <FaArrowLeftLong />
                     </NavLink>
                     <div className="admin-content">
@@ -168,10 +144,7 @@ function UpdateTourist(props) {
                                             value={city}
                                             onChange={(nextValue) => setCity(nextValue)}
 
-                                            data={country ? resorts.filter((item) => item.resort_id === country.id)[0].resorts :
-                                                resorts.filter((item) => item.resort_id === loadedTourist.country_id
-                                                )[0].resorts
-                                            }
+                                            data={resorts.filter((item) => item.resort_id === country.id)[0].resorts}
                                         />
                                     </div>
                                     <Input
@@ -239,7 +212,7 @@ function UpdateTourist(props) {
                 </div>
 
             }
-        </React.Fragment>
+        </React.Fragment >
     );
 }
 

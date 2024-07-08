@@ -3,34 +3,32 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useHttpClient } from "../shared/hooks/http-hook";
 import { AuthContext } from '../shared/context/auth-context';
 import Login from './components/Login';
-
+import { FaCheckCircle } from "react-icons/fa";
+import { FaRegCheckCircle } from "react-icons/fa";
 import ByCountryChart from './components/ByCountryChart';
 import ByCityChart from './components/ByCityChart';
 import ByYearChart from './components/ByYearChart';
+import OutsideClickHandler from "../shared/util/OutsideClickHandler";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropup } from "react-icons/io";
 import "./Admin.css"
 
 function Admin(props) {
     const auth = useContext(AuthContext);
-    const { isLoading, sendRequest } = useHttpClient();
+    const { sendRequest } = useHttpClient();
     const [loadedTourists, setLoadedTourists] = useState([]);
+    const [filter, setFilter] = useState("Стоимость")
 
+    const [showYear, setShowYear] = useState(false);
+    const [showFilter, setShowFilter] = useState(false)
 
-    const [show, setShow] = useState(false);
-
-
-    function onlyUnique(value, index, array) {
-        return array.indexOf(value) === index;
-    }
     useEffect(() => {
         const fetchPlace = async () => {
             try {
                 const responseData = await sendRequest(
-                    process.env.REACT_APP_BACKEND_URL +"/tourists/gettourists"
+                    process.env.REACT_APP_BACKEND_URL + "/tourists/gettourists"
                 );
                 setLoadedTourists(responseData.tourists);
-
             } catch (err) { }
         };
         fetchPlace();
@@ -52,17 +50,24 @@ function Admin(props) {
 
     const [selected, setSelected] = useState(allToppings);
 
-
     const [all, setAll] = useState(false);
+
+
 
     const Checkbox = ({ isChecked, label, checkHandler, index }) => {
         return (
-            <label className="option-item" >
+
+            <label className={"option-item"}>
+                {isChecked ?
+                    <FaCheckCircle className={"active-check"}
+                    /> :
+                    <FaRegCheckCircle className={"inactive-check"} />}
                 <input
                     type="checkbox"
                     id={`checkbox-${index}`}
                     checked={isChecked}
                     onChange={checkHandler}
+                    className='checkbox'
 
                 />
                 {label}
@@ -81,16 +86,17 @@ function Admin(props) {
 
     }
 
-
     useEffect(() => {
 
         setSelected(
             all ?
-                selected.map(topping => ({ ...topping, checked: true })) :
-                selected.map(topping => ({ ...topping, checked: false }))
+                selected.map(topping => ({ ...topping, checked: false })) :
+                selected.map(topping => ({ ...topping, checked: true }))
         )
 
-    }, [all])
+    }, [all]);
+
+
 
     return (
         <div className="admin_container">
@@ -107,23 +113,29 @@ function Admin(props) {
                                 <span></span>
                                 <p className="select-label">Filter</p>
                                 <div></div>
-                                <p className="select-label-option" onClick={() => setShow(!show)}>
+                                <p className="select-label-option" onClick={() => setShowYear(!showYear)}>
                                     Year
-                                    {!show ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}
+                                    {!showYear ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}
                                 </p>
 
                                 <div className="select-options"
-                                    style={show ?
+                                    style={showYear ?
                                         { height: `144px` } :
                                         { height: "0" }
                                     }
                                 >
-                                    <label className="option-item" htmlFor={`checkbox-all`}>
+                                    <label className={"option-item"} htmlFor={`checkbox-all`}>
+                                        {!selected.map((item) => item.checked).includes(false) ?
+                                            <FaCheckCircle className={"active-check"}
+                                            /> :
+                                            <FaRegCheckCircle className={"inactive-check"} />}
                                         <input
                                             type="checkbox"
                                             id={`checkbox-all`}
-                                            checked={all}
+                                            checked={!selected.map((item) => item.checked).includes(false)}
                                             onChange={() => setAll(!all)}
+                                            className='checkbox'
+
                                         />
                                         All
                                     </label>
@@ -141,6 +153,59 @@ function Admin(props) {
                                 </div>
                             </div >
                         </div>
+                        <div className="year_select_item filter_select">
+
+                            <div className='select-container'
+
+                            >
+                                <span></span>
+                                <span></span>
+                                <p className="select-label">Filter</p>
+                                <div></div>
+                                <p className="select-label-option" onClick={() => setShowFilter(!showFilter)}>
+                                    Filter
+                                    {!showFilter ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}
+                                </p>
+
+                                <div className="select-options"
+                                    style={showFilter ?
+                                        { height: `144px` } :
+                                        { height: "0" }
+                                    }
+                                >
+                                    {
+                                        ["Стоимость", "Количество"].map((item, index) => (
+                                            <OutsideClickHandler
+                                                onOutsideClick={() => {
+                                                    setShowFilter(false);
+                                                }}
+                                                key={item}
+                                            >
+                                                <label className={"option-item"}
+
+                                                   >
+                                                    {filter === item ?
+                                                        <FaCheckCircle className={"active-check"}
+                                                        /> :
+                                                        <FaRegCheckCircle className={"inactive-check"} />}
+                                                    <input
+                                                        type="radio"
+                                                        id={item}
+                                                        value={item}
+                                                        // id={`checkbox-${index}`}
+                                                        checked={filter === item}
+                                                        onChange={() => setFilter(item)}
+                                                        className='checkbox'
+
+                                                    />
+                                                    {item}
+                                                </label>
+                                            </OutsideClickHandler>
+                                        ))
+                                    }
+                                </div>
+                            </div >
+                        </div>
                     </div>
 
                     {loadedTourists.length >= 1 && <div className="admin-home-page">
@@ -149,16 +214,19 @@ function Admin(props) {
                                 <ByCountryChart data={loadedTourists}
                                     years={
                                         selected.filter(x => x.checked).map((item) => item.year)}
+                                    filtered={filter}
                                 />
                             </div>
                             <div className="admin-home-page-item">
                                 <ByCityChart data={loadedTourists}
                                     years={selected.filter(x => x.checked).map((item) => item.year)}
+                                    filtered={filter}
                                 />
                             </div>
                             <div className="admin-home-page-item">
                                 <ByYearChart data={loadedTourists}
                                     years={selected.filter(x => x.checked).map((item) => item.year)}
+                                    filtered={filter}
                                 />
                             </div>
                             {/* <div className="admin-home-page-item">

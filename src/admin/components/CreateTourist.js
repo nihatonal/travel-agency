@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useNavigate, useLocation } from "react-router-dom";
 import DropdownList from "react-widgets/DropdownList";
 import { v4 as uuid } from "uuid";
@@ -12,7 +13,7 @@ import ErrorModal from '../../shared/UI/ErrorModal';
 import SuccessModal from '../../shared/UI/SuccessModal';
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { LanguageContext } from "../../shared/context/Language";
-
+import { FaArrowLeftLong } from "react-icons/fa6";
 import "react-widgets/styles.css";
 import './CreateTourist.css';
 
@@ -79,7 +80,7 @@ function CreateTourist(props) {
                     otel: formState.inputs.otel.value,
                     date: formState.inputs.date.value,
                     cost: formState.inputs.cost.value,
-                    link: `http://localhost:3000/writecomment/${formState.inputs.touristname.value.toLowerCase().replace(/\s+/g, '')}/${city.toLowerCase().replace(/\s+/g, '')}/${formState.inputs.otel.value.toLowerCase().replace(/\s+/g, '')}`,
+                    link: `https://travel-agency-11d17.web.app/writecomment/${formState.inputs.touristname.value.toLowerCase().replace(/\s+/g, '')}/${city.toLowerCase().replace(/\s+/g, '')}/${formState.inputs.otel.value.toLowerCase().replace(/\s+/g, '')}`,
                     comment: ''
                 }),
                 {
@@ -88,7 +89,7 @@ function CreateTourist(props) {
             );
             setSuccess(true)
             setTimeout(() => {
-                navigate(`/tourists/touristlist/`);
+                navigate(`/admin/touristlist/`);
             }, 2000);
 
         } catch (err) {
@@ -101,6 +102,11 @@ function CreateTourist(props) {
             <SuccessModal success={success} msg={'Added tour'} />
 
             <div className="admin-content-wrapper">
+                {location.state && <NavLink to={`/admin/touristlist/${location.state && location.state[1]}`
+                    // state = { [location.state[0], location.state[1], location.state[2]]}
+                } className='back_arrow'>
+                    <FaArrowLeftLong />
+                </NavLink>}
                 <div className="admin-content">
                     <h3 className="admin-content-title">Add Tour</h3>
                     <div className='create-tourist-container'>

@@ -45,10 +45,10 @@ thead {
 .table-scroll table tr:nth-child(even) {
   background-color: #ff694f3f;
 }
-.table-scroll table tr:hover {
+/* .table-scroll table tr:hover {
   background-color: #ff927ee0;
   color: #fff;
-}
+} */
 .update-tourist-modal {
   position: absolute;
   top: 0;
@@ -62,8 +62,8 @@ thead {
 .details-btn svg {
   color: var(--primary-color);
 }
-.table-scroll table tr:hover svg {
-  color: #fff;
+.details-btn:hover svg {
+  color: var(--secondary-color);
 }
 
 @media only screen and (max-width: 767px) {
@@ -82,3 +82,6 @@ thead {
     width: 100%;
   }
 }
+/* .tourist-row {
+  position: relative;
+} */

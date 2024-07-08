@@ -81,6 +81,33 @@
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
 }
+.bg_img-in:nth-last-child(1) {
+  animation-delay: 1500ms;
+}
+.bg_img-in:nth-last-child(2) {
+  animation-delay: 500ms;
+}
+.bg_img-in:nth-last-child(3) {
+  animation-delay: 850ms;
+}
+.bg_img-in:nth-last-child(4) {
+  animation-delay: 1250ms;
+}
+.bg_img-in:nth-last-child(5) {
+  animation-delay: 500ms;
+}
+.bg_img-in:nth-last-child(6) {
+  animation-delay: 850ms;
+}
+.bg_img-in:nth-last-child(7) {
+  animation-delay: 1250ms;
+}
+.bg_img-in:nth-last-child(8) {
+  animation-delay: 500ms;
+}
+.bg_img-in:nth-last-child(8) {
+  animation-delay: 950ms;
+}
 .testimonials-bg-item {
   width: 120px;
   height: 120px;

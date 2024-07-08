@@ -29,3 +29,7 @@
     height: 8px;
   }
 }
+.slider-container .slick-arrow {
+  z-index: -1;
+  opacity: 0;
+}

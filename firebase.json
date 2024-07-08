@@ -13,12 +13,12 @@
         "type": 302
       },
       {
-        "source": "/tourists/touristlist",
+        "source": "/admin/touristlist",
         "destination": "/index.html",
         "type": 302
       },
       {
-        "source": "/tourists/:temail",
+        "source": "/admin/touristlist/:temail",
         "destination": "/index.html",
         "type": 302
       },

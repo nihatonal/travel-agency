@@ -24,14 +24,14 @@ function Contact(props) {
                     <div className="contact-items_wrapper">
                         <div className="contact-item">
                             <h4 className="contact-item-title">Phone</h4>
-                            <a href='www.google.com' target={'_blank'}>
-                                +7 989 699 58 47
+                            <a href="tel:+79651991188" target={'_blank'} rel="noreferrer">
+                                +7 965 199 11 88
                             </a>
                         </div>
                         <div className="contact-item">
                             <h4 className="contact-item-title">Email</h4>
-                            <a href='www.google.com' target={'_blank'}>
-                                deneme@gmail.com
+                            <a href='mailto:inessa.sitova@gmail.com' target={'_blank'} rel="noreferrer">
+                                inessa.sitova@gmail.com
                             </a>
                         </div>
                         <SocialBar />

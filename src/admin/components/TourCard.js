@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import './TourCard.css';
 function TourCard(props) {
-    const data = props.data
+    const data = props.data;
     return (
         <div className={`tourist-card-wrapper ${props.className}`}
             style={props.style}>
@@ -30,7 +30,7 @@ function TourCard(props) {
                 </div>
             </div>
             {props.children}
-        </div>
+        </div >
     );
 }
 

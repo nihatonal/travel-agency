@@ -26,7 +26,7 @@ const Main = React.lazy(() => import("./main/Main.js"));
 
 function App() {
   const { token, login, logout, userId } = useAuth();
-  const { setProfileImage, image } = useShare();
+  const { setProfileImage, image, AdminURL, adminURL } = useShare();
   const pathname = window.location.pathname;
 
   useEffect(() => {
@@ -38,9 +38,9 @@ function App() {
     routes = (
       <React.Fragment>
         <Route exact path="/" element={<Main />} />
-        <Route exact path="/tourists/touristlist" element={<Tourists />} />
-        <Route exact path="/admin/tourists/addtourist" element={<CreateTourist />} />
-        <Route exact path="/tourists/:temail" element={<TouristDetails />} />
+        <Route exact path="/admin/touristlist" element={<Tourists />} />
+        <Route exact path="/admin/addtourist" element={<CreateTourist />} />
+        <Route exact path="/admin/touristlist/:temail" element={<TouristDetails />} />
         <Route exact path='/admin/tourists/:tid' element={<UpdateTourist />} />
 
         <Route exact path='/admin' element={<Admin />} />
@@ -71,7 +71,7 @@ function App() {
         }}
       >
 
-        <ShareContext.Provider value={{ setProfileImage: setProfileImage, image: image }}>
+        <ShareContext.Provider value={{ setProfileImage: setProfileImage, image: image, AdminURL: AdminURL, adminURL: adminURL }}>
           <LanguageProvider>
             <BrowserRouter>
               <Suspense

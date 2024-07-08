@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "../shared/hooks/form-hook";
-
+import moment from 'moment';
 import ErrorModal from '../shared/UI/ErrorModal';
 import SuccessModal from '../shared/UI/SuccessModal';
 import { useHttpClient } from "../shared/hooks/http-hook";
@@ -20,8 +20,7 @@ import PropagateLoader from "react-spinners/PropagateLoader";
 import './Tourist.css';
 function Tourist(props) {
     const navigate = useNavigate();
-    const location = useLocation()
-    console.log(location)
+    const tid = useParams().tid;
     const share = useContext(ShareContext);
     const touristId = useParams().tid;
     const { isLoading, sendRequest } = useHttpClient();
@@ -29,7 +28,7 @@ function Tourist(props) {
     const [deleteImg, setDeleteImg] = useState([]);
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
-
+    const [loadedTourist, setLoadedTourist] = useState({});
 
     const [formState, inputHandler] = useForm({
         comment: {
@@ -42,6 +41,19 @@ function Tourist(props) {
         },
 
     });
+    useEffect(() => {
+        const fetchPlace = async () => {
+            try {
+                const responseData = await sendRequest(
+                    process.env.REACT_APP_BACKEND_URL + "/tourists/" + tid
+                );
+                setLoadedTourist(responseData.tourist);
+                console.log(responseData.tourist)
+            } catch (err) { }
+        };
+        fetchPlace();
+    }, [sendRequest]);
+
     useEffect(() => {
         if (Array.isArray(deleteImg) && deleteImg.length < 2) return
 
@@ -127,12 +139,12 @@ function Tourist(props) {
                                 <ImageCrop />
                             </ImageCropProvider>
                         </div>
-                        <div className="tourist-info">
-                            <p className="tourist-name">Chuck Bartowski</p>
-                            <p className="tourist-location"><FaCheck /> Antalya</p>
-                            <p className="tourist otel"><FaCheck /> Aldai Resort Otel</p>
-                            <p className="tourist-date"><FaCheck /> May 2024</p>
-                        </div>
+                        {loadedTourist && <div className="tourist-info">
+                            <p className="tourist-name">{loadedTourist.touristname}</p>
+                            <p className="tourist-location"><FaCheck /> {loadedTourist.country}</p>
+                            <p className="tourist otel"><FaCheck /> {loadedTourist.otel}</p>
+                            <p className="tourist-date"><FaCheck /> {moment(new Date(loadedTourist.date)).format("MMMM / YYYY")}</p>
+                        </div>}
                     </div>
                     <div className="tourist-comment">
                         {/* <textarea type="text" onChange={inputHandler} id='comment' value={formState.inputs.comment.value} /> */}
